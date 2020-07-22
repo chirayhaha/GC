@@ -1,0 +1,102 @@
+<template>
+    <div class="orderdetail">
+        <div class="top">
+            <back></back>
+            <span class="title">订单详情</span>
+        </div>
+        <div class="middle" v-for="(order,index) in orderinfo" :key="index">
+            <div class="sid"><span>{{order.storeid}}</span></div>
+            <div class="add">
+                <span>{{order.address}}</span>
+                <span></span>
+                <span class="phone">{{order.conphone}}</span>
+            </div>
+            <div class="good">
+                <span class="name">{{order.foodname}} </span>
+                <span class="num"> x{{order.ordernum}}</span>
+            </div>
+            <div class="bottom">
+                <span class="total">合计：￥{{order.total}}</span>
+                <span class="orderid">订单编号:{{order.orderid}} </span>
+            </div>
+            
+        </div>
+
+    </div>
+</template>
+
+<script>
+import back from '../components/back';
+
+    export default {
+        name:'orderdetail',
+        data(){
+            return{
+                orderinfo:[]
+            }
+        },
+        components:{back},
+        methods:{
+            orderdetail(){
+                let orderid = this.$route.params
+                console.log(orderid)
+                this.$api.user.orderdetail(orderid).then(res=>{
+                    this.orderinfo = res.data
+                    console.log(this.orderinfo)
+                })
+            }
+        },
+        created(){
+            this.orderdetail()
+        }
+    }
+</script>
+
+<style scoped>
+*{padding: 0;margin: 0;overflow-x: hidden;}
+.top{
+    height: 70px;
+    text-align: center;
+}
+.title{
+    font-size: 25px;
+    color: rgb(150, 150, 63);
+}
+.middle{
+    height: 92%;
+}
+.add{
+    background-color: aliceblue;
+    height: 50px;
+    padding: 10px 20px;
+    line-height: 1.5rem;
+}
+.good{
+    height: 65px;
+    background-color: aquamarine;
+    padding: 5px 15px;
+}
+.good .name{
+    position: relative;
+    top: 10px;
+}
+.good .num{
+    position: relative;
+    top: 10px;
+}
+.bottom{
+    height: 50px;
+    background-color: blueviolet;
+    padding: 10px 15px;
+}
+.bottom .total{
+    position: relative;
+    top: 5px;
+    left: 230px;
+}
+.bottom .orderid{
+    position: relative;
+    top: 25px;
+    left: 10px;
+}
+</style>
