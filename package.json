@@ -24,7 +24,7 @@
     "@vue/cli-plugin-vuex": "~4.2.0",
     "@vue/cli-service": "~4.2.0",
     "chai": "^4.2.0",
-    "mocha": "^7.1.1",
+    "mocha": "^10.2.0",
     "supertest": "^4.0.2",
     "vue-template-compiler": "^2.6.11"
   },
